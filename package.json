@@ -35,6 +35,9 @@
   "scripts": {
     "build": "npm run test && rollup -c && rollup -c --format=iife --output=dist/$npm_package_config_moduleName.iffe.js --target=es5",
     "build:watch": "npm run build -- -w",
-    "test": "standard 'src/*.js' --parser typescript-eslint-parser | snazzy && tsc src/*.ts --noEmit --pretty --alwaysStrict --noUnusedLocals --target ES5 --lib es6,dom && standard-readme"
+    "test": "standard 'src/*.js' --parser typescript-eslint-parser | snazzy && tsc src/*.ts --noEmit --pretty --allowJs --alwaysStrict --noUnusedLocals --target ES5 --lib es6,dom && standard-readme",
+    "preversion": "npm test",
+    "version": "npm run build && git add -A dist docs",
+    "postversion": "git push && git push --tags",
   }
 }
